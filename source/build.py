@@ -6,16 +6,17 @@ comm=[dict(period="September 1 – October 31, 2026",sales=total,comm=comm_amt,s
 # units sold Oct 27 - Nov 11 (from refill of Nov 11)
 PRODUCTS=[("Diet Coke",14),("Coca-Cola",9),("Coke Zero",5),("Diet Pepsi",3),("Pepsi",2),("Snickers / Mars",2),("Sour Patch Kids",2),("Skittles",1),("Cracker bars",1)]
 PRODUCTS=[dict(name=n,qty=q,amt=0) for n,q in PRODUCTS]
-HPV=6; NV=4; HRS=HPV*NV
+HPV=6; NV=6; HRS=HPV*NV
 labour=round(HRS*25*(1+0.0595+0.0228+0.04)*1.05)
 work=[
  dict(k="Machine installed",v="Aug 20",p="August 20, 2026: delivered, installed and stocked by Buenavyda, with card, cash and coin payment."),
- dict(k="Service visits logged",v=f"{NV}",p="Installation, then refills on October 7, October 27 and November 11, each one leaving the machine full."),
+ dict(k="Service visits logged",v=f"{NV}",p="Installation and 5 refills, the latest on October 7, October 27 and November 11, each one leaving the machine full."),
  dict(k="Hours per visit",v=f"{HPV} h",p="4 h buying stock and planning the refill, 1 h driving there and back, and 1 h refilling and cleaning on site."),
  dict(k="Items in the machine",v="207",p="30 coils: chips, candy and chocolate bars, protein snacks, sodas, energy drinks, Gatorade and protein shakes."),
  dict(k="Drink price",v="$1.00",p="Every drink has been $1.00 since October 27, to give your customers and staff an easy treat while they wait."),
 ]
 inv=[dict(item="A vending machine on site, with card, cash and coin payment, delivered and installed",amt=6500,how="What Buenavyda paid for the machine"),
+ dict(item="Installation: delivery, moving the machine into place, electrical setup and payment system activation",amt=1000,how="Installation costs paid by Buenavyda"),
  dict(item="A full machine of products from day one",amt=255,how="≈207 items at our cost (about half the selling price)"),
  dict(item=f"{HRS} hours of service: buying, driving, restocking, cleaning and cash",amt=labour,how="$25/h plus employer CPP 5.95%, EI 2.28%, 4% vacation pay and ≈5% payroll and accounting")]
 invT=round(sum(r["amt"] for r in inv))
