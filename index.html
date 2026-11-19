@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volkswagen Cambridge × Buenavyda — Vending report and GrabGo proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+:root{--night:#0E1A2B;--ink:#18263A;--paper:#F3F5F8;--card:#fff;--line:#DCE2EA;--muted:#5E6B7E;--green:#127A5A;--amber:#D9921C;--gold:#E0A526;--teal:#0F7C80;--coral:#D9534F;--sky:#5BA4CF;
+--display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 var(--body)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.12;margin:0}
+a{color:var(--green)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}.read{max-width:68ch}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}[id]{scroll-margin-top:64px}
+.cover{background:radial-gradient(1000px 480px at 90% -10%,#1C3B4A 0%,transparent 60%),var(--night);color:#E6EEF6;padding:56px 0 46px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin:0 0 16px}
+.cover h1{font-size:clamp(34px,5vw,58px);font-weight:800;letter-spacing:-.02em;color:#fff;max-width:22ch}
+.cover .q{font-size:20px;color:#C9D6E3;max-width:62ch;margin:22px 0 0}.cover .q b{color:#fff;font-weight:600}
+.byline{margin-top:22px;font-size:14px;color:#9DB0C7}.byline strong{color:#E6EEF6}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:30px}
+.kpi{background:#13243D;border:1px solid #27426A;border-radius:14px;padding:16px 18px}
+.kpi .k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.kpi .v{font-family:var(--display);font-weight:800;font-size:34px;color:#fff;line-height:1.1;margin-top:4px}
+.kpi .s{font-size:13.5px;color:#9DB0C7}
+.topnav{position:sticky;top:0;z-index:20;background:rgba(14,26,43,.96);border-bottom:1px solid #22395A}
+.topnav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+.topnav a{flex:none;font-family:var(--mono);font-size:13px;color:#C9D5E4;text-decoration:none;border:1px solid #2F4A6E;border-radius:999px;padding:6px 12px}
+.topnav a.on{background:var(--amber);border-color:var(--amber);color:var(--night);font-weight:600}
+section{padding:52px 0}
+.sec-tag{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 10px}
+section h2{font-size:clamp(27px,3.6vw,40px);letter-spacing:-.015em}
+.lede{font-size:18.5px;color:#33445C;margin:16px 0 0}
+.white{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.panel{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 14px 8px}
+.white .panel{background:var(--paper)}
+.chart{width:100%;height:360px}.chart.tall{height:440px}
+.note{font-size:13px;color:var(--muted);margin:6px 6px 8px}
+.seg{display:flex;gap:6px;flex-wrap:wrap;padding:0 6px 10px}
+.seg button{font:600 13.5px var(--body);border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer}
+.seg button.on{background:var(--green);border-color:var(--green);color:#fff}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:26px}
+.tb{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}.white .tb{background:var(--paper)}
+.tb .k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tb h3{font-size:20px;margin:6px 0 6px}.tb p{margin:0;font-size:15.5px;color:#33445C}
+.tb .big{font-family:var(--display);font-weight:800;font-size:34px;color:var(--green);line-height:1.05;margin-top:4px}
+.tb .big.amber{color:var(--amber)}
+.finding{margin-top:16px;display:grid;grid-template-columns:52px 1fr;gap:14px;background:var(--night);color:#E3EAF3;border-radius:16px;padding:20px}
+.finding .n{font-family:var(--display);font-weight:800;font-size:32px;color:var(--amber);line-height:1}
+.finding p{margin:0}.finding b{color:#fff}
+table.t{width:100%;border-collapse:collapse;font-size:15px;margin-top:8px}
+table.t th{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:1px solid var(--line);padding:8px 10px}
+table.t td{border-bottom:1px solid var(--line);padding:9px 10px}
+table.t td.r,table.t th.r{text-align:right}
+.pending{display:inline-block;font-family:var(--mono);font-size:11.5px;background:#FFF4DE;color:#8A5A00;border:1px solid #F1D49A;border-radius:6px;padding:1px 6px;margin-left:6px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.col{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.col h3{font-size:19px;margin-bottom:10px}.col ul{margin:0;padding-left:18px;font-size:15.5px;color:#33445C}.col li{margin-bottom:7px}
+.col.us{border-color:var(--green);box-shadow:0 6px 18px rgba(18,122,90,.10)}
+.col.them{opacity:.92}
+.whatif{background:linear-gradient(180deg,#0F1E33 0%,#13294A 100%);color:#E3EAF3}
+.whatif h2{color:#fff}.whatif .lede{color:#C9D5E4}.whatif .sec-tag{color:var(--gold)}
+.wpanel{margin-top:26px;background:#0B1729;border:1px solid #27426A;border-radius:18px;padding:18px}
+.control{display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center;padding:6px 6px 14px}
+.control label{font-weight:600;color:#fff}.control output{font-family:var(--mono);font-weight:600;font-size:20px;color:var(--gold)}
+.control input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--gold);height:28px}
+.wres{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:6px}
+.wres .r{background:#13243D;border:1px solid #27426A;border-radius:12px;padding:14px}
+.wres .r .k{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#9DB0C7}
+.wres .r .v{font-family:var(--display);font-weight:800;font-size:30px;color:#fff}
+.shelf{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;margin-top:26px}
+.steps{display:grid;gap:10px}
+.st{display:grid;grid-template-columns:42px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.st .n{font-family:var(--display);font-weight:800;font-size:24px;color:var(--green)}
+.st p{margin:0;font-size:15.5px;color:var(--ink)}.st b{color:var(--ink)}
+footer{background:var(--night);color:#9DB0C7;padding:30px 0;font-size:14px}footer a{color:#E6EEF6}
+.brandbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:34px}
+.brandbar .tag{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7FA3C8}
+.brands{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brands img{display:block;height:44px;width:auto}.brands img.ac{height:38px}
+.brands .site{font-family:var(--mono);font-size:13.5px;font-weight:600;color:#fff;text-decoration:none;border:1px solid #3FD16B;border-radius:999px;padding:8px 14px}
+.lang{display:inline-flex;gap:4px;font-family:var(--mono);font-size:13px}.lang b,.lang a{padding:7px 10px;border-radius:999px;border:1px solid #2F4A6E;color:#C9D5E4;text-decoration:none}.lang b{background:#FFD43B;border-color:#FFD43B;color:#0B0D10}
+.brands .site:hover{background:#3FD16B;color:#0B0D10}
+.aiband{background:#070B12;color:#E6EEF6;border-top:1px solid #1C2B42;padding:44px 0;overflow:hidden}
+.aiband .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:30px;align-items:center}
+.aiband .big{font-family:var(--display);font-weight:800;font-size:clamp(46px,8vw,96px);line-height:.95;letter-spacing:-.03em;margin:0;background:linear-gradient(90deg,#4C8DFF,#3FD16B 45%,#FFD43B 70%,#FF3B5C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.aiband p{font-size:18px;color:#B9C7D8;margin:16px 0 0;max-width:46ch}.aiband p b{color:#fff}
+.aiband .cta{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-weight:600;color:#0B0D10;background:#FFD43B;border-radius:999px;padding:11px 20px;text-decoration:none}
+.aiband .cta:hover{background:#fff}
+#aiCanvas{width:100%;height:420px;display:block}
+.vidrow{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;margin-top:28px}
+.phone{position:relative;width:min(320px,82vw);aspect-ratio:9/16;border-radius:34px;padding:10px;background:#05070B;border:1px solid #2F4A6E;box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 0 6px #0B1729}
+.phone video{width:100%;height:100%;border-radius:26px;display:block;background:#000;object-fit:cover}
+.playbtn{position:absolute;inset:10px;border-radius:26px;border:0;cursor:pointer;background:rgba(5,7,11,.25);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#fff;font:600 15px var(--body)}
+.playbtn span.c{width:78px;height:78px;border-radius:50%;background:#FFD43B;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(255,212,59,.25)}
+.playbtn span.l{background:rgba(5,7,11,.75);border-radius:999px;padding:6px 14px}
+.vidtext h3{font-size:26px;color:#fff;margin:0 0 12px}.vidtext ul{margin:0;padding-left:20px;color:#C9D5E4;font-size:16.5px}.vidtext li{margin-bottom:8px}.vidtext li b{color:#fff}
+.social{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.social a{font-family:var(--mono);font-size:13px;color:#E6EEF6;text-decoration:none;border:1px solid #2F4A6E;border-radius:999px;padding:6px 12px}
+.social a:hover{border-color:#FFD43B;color:#FFD43B}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:18px}.fgrid h4{margin:0;color:#fff;font:600 14px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:860px){.aiband .wrap,.vidrow,.fgrid{grid-template-columns:1fr}#aiCanvas{height:340px}.phone{margin:0 auto}}
+.valuesum{display:grid;grid-template-columns:1fr auto 1fr auto 1.2fr;gap:12px;align-items:center;margin-top:26px}
+.vs{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px}.vs .k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.vs .v{font-family:var(--display);font-weight:800;font-size:36px;color:var(--green);line-height:1.1;margin-top:4px}.vs p{margin:4px 0 0;font-size:14.5px;color:#33445C}
+.vs.plus{background:none;border:0;padding:0;font-family:var(--display);font-weight:800;font-size:34px;color:var(--muted);text-align:center}
+.vs.total{background:var(--night);border-color:var(--night)}.vs.total .k{color:var(--gold)}.vs.total .v{color:#fff;font-size:44px}.vs.total p{color:#C9D5E4}
+@media (max-width:860px){.valuesum{grid-template-columns:1fr}.vs.plus{font-size:26px;line-height:1}}
+@media (max-width:760px){.compare,.shelf{grid-template-columns:1fr}.chart{height:300px}}
+</style>
+</head>
+<body>
+<body>
+<header class="cover" id="top">
+ <div class="wrap">
+  <div class="brandbar"><span class="tag">AI-oriented operations</span><div class="brands"><a href="https://buenavyda.com/grab-and-go" aria-label="Buenavyda GrabGo"><img src="assets/buenavyda-grabgo.svg" alt="Buenavyda GrabGo"></a><a href="https://www.youtube.com/@analystchannel" aria-label="Analyst Channel"><img class="ac" src="assets/analyst-channel.png" alt="Analyst Channel"></a><a class="site" href="https://buenavyda.com">buenavyda.com ↗</a></div></div>
+  <p class="eyebrow">Prepared for the Volkswagen Cambridge team · November 19, 2026</p>
+  <h1>Your vending machine, run by Buenavyda: our investment, your 10%.</h1>
+  <p class="q">In <b>September 2026</b> Buenavyda installed a vending machine at Volkswagen Cambridge, and we stock, clean and manage it. <b>Volkswagen Cambridge has invested nothing and earns 10% of every sale.</b> This page shows the real numbers from the machine's payment system, what your customers and staff buy, and our next idea for your customer lounge.</p>
+  <p class="byline"><strong>Antonio Sainz</strong> · Buenavyda · JAGEISSA Global Export and Import Services Inc. · Data: Nayax payment system, updated November 19, 2026</p>
+  <div class="kpis">
+   <div class="kpi"><div class="k">Sales, Sep–Oct</div><div class="v num">$200.25</div><div class="s">September and October</div></div>
+   <div class="kpi"><div class="k">Your commission</div><div class="v num">$20.03</div><div class="s">10% of sales · pending, paid with the next period</div></div>
+   <div class="kpi"><div class="k">Invested by Volkswagen Cambridge</div><div class="v num">$0</div><div class="s">≈$6,775 of value from Buenavyda, commission included</div></div>
+   <div class="kpi"><div class="k">Drinks now</div><div class="v num">$1.00</div><div class="s">every drink since October 27, for your customers and staff</div></div>
+  </div>
+ </div>
+</header>
+<section class="aiband" aria-label="AI-oriented">
+ <div class="wrap">
+  <div>
+   <h2 class="big">AI&#8209;oriented.</h2>
+   <p>Buenavyda runs on its own AI tools. <b>The machine's sales data turns into restock lists, routes and reports like this one</b>, so each visit brings exactly what sells. GrabGo, our newest service, takes the same AI to a simple shelf that people pay for from their phone.</p>
+   <a class="cta" href="#grabgo-video">▶ Watch the 50-second video</a>
+  </div>
+  <canvas id="aiCanvas" role="img" aria-label="Animated diagram: AI at the centre, connected to Buenavyda GrabGo, Analyst Channel, the vending machine, sales data, restock lists and live reports, with sparks of information moving between them."></canvas>
+ </div>
+</section>
+<nav class="topnav" aria-label="Sections"><div class="wrap">
+ <a href="#sales">Sales</a><a href="#what">What they buy</a><a href="#earnings">Your earnings</a><a href="#work">Our work</a><a href="#why">Why us</a><a href="#grabgo">Next: GrabGo in your lounge</a><a href="#grabgo-video">Video</a>
+</div></nav>
+
+<section id="sales"><div class="wrap">
+ <p class="sec-tag">01 · Sales</p>
+ <h2>Monthly sales at Volkswagen Cambridge</h2>
+ <p class="lede read">Every sale is recorded by the Nayax card and cash system inside the machine. These are the first months since installation in September.</p>
+ <div class="panel"><div id="cMonthly" class="chart"></div><p class="note">Source: Nayax sales records. November is not shown yet because the month is not complete.</p></div>
+ <div class="finding"><div class="n">1</div><p><b>Sales grew from $72.50 in September to $127.75 in October</b>, a 76% increase as more customers and staff discovered the machine.</p></div>
+</div></section>
+
+<section id="what" class="white"><div class="wrap">
+ <p class="sec-tag">02 · What they buy</p>
+ <h2>What your customers and staff choose</h2>
+ <p class="lede read">Units sold from October 27 to November 11, counted from the coil each sale came from. We use this to change the mix: slow items rotate out and favourites get more space.</p>
+ <div class="panel"><div id="cProd" class="chart tall"></div></div>
+ <div class="finding"><div class="n">2</div><p><b>Cold drinks lead: Diet Coke, Coca-Cola and Coke Zero</b> made up most purchases in the last cycle. That is why we keep extra cans ready and moved every drink to $1.00.</p></div>
+</div></section>
+
+<section id="earnings"><div class="wrap">
+ <p class="sec-tag">03 · Your earnings</p>
+ <h2>10% of every sale</h2>
+ <p class="lede read">Volkswagen Cambridge receives 10% of gross sales on full months. Nothing is deducted for products, refills, card fees, repairs or our time.</p>
+ <div class="panel"><table class="t" id="tComm"></table></div>
+</div></section>
+
+<section id="work" class="white"><div class="wrap">
+ <p class="sec-tag">04 · The work behind it</p>
+ <h2>What it takes to keep the machine full</h2>
+ <p class="lede read">Behind the machine there is buying, driving, restocking, cleaning, handling cash, fixing jams and failed card payments, and a review of the sales. We do all of it, and we use AI to plan every refill from the machine's own data.</p>
+ <div class="grid3" id="workCards"></div>
+ <h3 style="font-size:24px;margin-top:40px">The value Buenavyda brings to Volkswagen Cambridge</h3>
+ <p class="lede read" style="font-size:17px">Everything below comes to the dealership at no cost: the machine, the products and the service. Your customers and staff get a full-service vending machine, and the dealership earns a commission on top.</p>
+ <div class="panel"><table class="t" id="tInv"></table><p class="note">The machine value is what Buenavyda paid for it. Products after the first load are paid from sales, so they are not counted twice. Our time, fuel and restocking are not included in this total.</p></div>
+</div></section>
+
+<section id="why"><div class="wrap">
+ <p class="sec-tag">05 · Why keep Buenavyda operating</p>
+ <h2>What Volkswagen Cambridge receives from Buenavyda</h2>
+ <div class="valuesum">
+  <div class="vs"><div class="k">Value added by Buenavyda</div><div class="v num">$6,755</div><p>Machine and first product load</p></div>
+  <div class="vs plus" aria-hidden="true">+</div>
+  <div class="vs"><div class="k">Your commission</div><div class="v num">$20.03</div><p>10% of sales, September–October</p></div>
+  <div class="vs plus" aria-hidden="true">=</div>
+  <div class="vs total"><div class="k">Total value for Volkswagen Cambridge</div><div class="v num">$6,775</div><p>with $0 invested by the dealership</p></div>
+ </div>
+ <div class="col us" style="margin-top:18px"><h3>With Buenavyda</h3><ul>
+   <li><b>$0 invested</b>, no staff time, no stock risk.</li>
+   <li>10% of every sale, with this live report to check it.</li>
+   <li>Products chosen from real sales data and from your team's requests.</li>
+   <li>Drinks at $1.00 since October 27, a small perk for your customers while they wait.</li>
+   <li>AI-planned refills: each visit brings exactly what is missing.</li>
+ </ul></div>
+</div></section>
+
+<section id="grabgo" class="whatif"><div class="wrap">
+ <p class="sec-tag">06 · The next step</p>
+ <h2>A GrabGo station in your customer lounge</h2>
+ <p class="lede read">Customers waiting for their car spend time in your lounge, right next to your coffee bar. Buenavyda GrabGo adds a small shelf of chips and cold sodas beside it, without moving anything at your coffee station. People take what they want, send a photo by text message, and pay with their card or Apple Pay / Google Pay. It complements the vending machine: we stock it, run it and pay the dealership a commission, with no investment from you.</p>
+ <div class="vidrow" id="grabgo-video">
+  <div class="phone"><video id="gv" src="assets/grabgo-essentials.mp4" poster="assets/grabgo-essentials-poster.jpg" preload="none" playsinline></video><button class="playbtn" id="gvPlay" aria-label="Play the GrabGo video"><span class="c"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#0B0D10"/></svg></span><span class="l">Watch · 50 s · sound on</span></button></div>
+  <div class="vidtext">
+   <h3>See how it works</h3>
+   <ul>
+    <li><b>The idea:</b> a small, elegant shelf with snacks and cold drinks right where customers wait.</li>
+    <li><b>How people pay:</b> grab it, snap a photo, text it, and pay with a secure Stripe link: Apple Pay, Google Pay or any credit card.</li>
+    <li><b>Nothing to manage:</b> we stock it from the sales data, the same way we run the vending machine.</li>
+    <li><b>Privacy first:</b> it can run with the customer's own photo only, with no camera in your lounge.</li>
+    <li><b>A showcase:</b> a modern, AI-run service that fits a modern dealership.</li>
+   </ul>
+  </div>
+ </div>
+ <div class="wpanel">
+  <div class="control"><label for="rIt">Items bought per week in the lounge</label><output id="oIt" class="num">5</output><input id="rIt" type="range" min="1" max="15" value="5"></div>
+  <div class="control"><label for="rPr">Average price per item</label><output id="oPr" class="num">$4.00</output><input id="rPr" type="range" min="2" max="10" step="0.5" value="4"></div>
+  <div class="wres">
+   <div class="r"><div class="k">Shelf sales / month</div><div class="v num" id="wS">—</div></div>
+   <div class="r"><div class="k">Location at 10% / month</div><div class="v num" id="wC">—</div></div>
+   <div class="r"><div class="k">Per year, both services</div><div class="v num" id="wY">—</div></div>
+  </div>
+  <p class="note" style="color:#9DB0C7">This is a calculator, not a forecast: move the sliders to your own estimate. It assumes the same 10% as the vending machine; final terms to agree. "Both services" adds the vending machine's average monthly commission so far.</p>
+ </div>
+ <div class="shelf">
+  <div class="steps">
+   <div class="st"><div class="n">1</div><p><b>We place a small shelf</b> beside your coffee bar, with a sign and QR code. Nothing at your coffee station moves.</p></div>
+   <div class="st"><div class="n">2</div><p><b>People take an item and send a photo</b> by text message. Our AI recognises it and sends a payment link.</p></div>
+   <div class="st"><div class="n">3</div><p><b>We restock from the sales data</b>, the same way we run the vending machine.</p></div>
+   <div class="st"><div class="n">4</div><p><b>The location gets a commission and a live report</b> like this one.</p></div>
+  </div>
+  <div class="tb" style="background:#13243D;border-color:#27426A;color:#E3EAF3"><div class="k" style="color:var(--gold)">What goes on the shelf</div><h3 style="color:#fff">Chips and cold sodas first</h3><p style="color:#C9D5E4">We start with what already sells in your machine (Coca-Cola, Diet Coke, Coke Zero, chips and candy) and add whatever your team asks for. Prices stay simple, so paying from the phone takes seconds.</p></div>
+ </div>
+</div></section>
+
+<footer><div class="wrap">
+ <div class="fgrid">
+  <div><h4>Buenavyda GrabGo</h4><div class="social"><a href="https://buenavyda.com/grab-and-go">buenavyda.com/grab-and-go</a><a href="sms:+14375634722">Text +1 437-563-GRAB</a><a href="https://wa.me/14375634722">WhatsApp</a></div></div>
+  <div><h4>Analyst Channel</h4><div class="social"><a href="https://www.youtube.com/@analystchannel">YouTube</a><a href="https://www.tiktok.com/@analystchannel">TikTok</a><a href="https://www.instagram.com/analystchannel">Instagram</a><a href="https://www.facebook.com/AnalystChannel">Facebook</a><a href="https://x.com/AnalystChannel">X</a></div></div>
+ </div>
+ <p><b style="color:#fff">Buenavyda</b> · operated by JAGEISSA Global Export and Import Services Inc., Cambridge, Ontario · Antonio Sainz · antonio@buenavyda.ca</p>
+ <p>Sales data from the Nayax system in the machine. Commission figures are 10% of gross sales on full months.</p>
+</div></footer>
+
+<script>
+const D={"video": "", "inv": [{"item": "A vending machine on site, with card, cash and coin payment, delivered and installed", "amt": 6500, "how": "What Buenavyda paid for the machine"}, {"item": "A full machine of products from day one", "amt": 255, "how": "\u2248207 items at our cost (about half the selling price)"}], "invTotal": 6755, "earned": 20.03, "months": [{"label": "Sep 2026", "total": 72.5, "partial": false}, {"label": "Oct 2026", "total": 127.75, "partial": false}], "comm": [{"period": "September 1 \u2013 October 31, 2026", "sales": 200.25, "comm": 20.03, "status": "Pending \u00b7 paid with the next period"}, {"period": "November 2026 onward", "sales": 0, "comm": 0, "status": "Next payment after January 31, 2027"}], "work": [{"k": "Machine installed", "v": "Sep 2026", "p": "Delivered, installed and stocked by Buenavyda, with card, cash and coin payment."}, {"k": "Logged refill visits", "v": "3", "p": "October 7, October 27 and November 11, each one leaving the machine full (207 items)."}, {"k": "Items in the machine", "v": "207", "p": "30 coils: chips, candy and chocolate bars, protein snacks, sodas, energy drinks, Gatorade and protein shakes."}, {"k": "Drink price", "v": "$1.00", "p": "Every drink has been $1.00 since October 27, to give your customers and staff an easy treat while they wait."}], "avgMonthlyComm": 10.012500000000001, "visits": [], "hpv": 0, "heat": {"hours": [], "z": [], "days": []}, "products": [{"name": "Diet Coke", "qty": 14, "amt": 0}, {"name": "Coca-Cola", "qty": 9, "amt": 0}, {"name": "Coke Zero", "qty": 5, "amt": 0}, {"name": "Diet Pepsi", "qty": 3, "amt": 0}, {"name": "Pepsi", "qty": 2, "amt": 0}, {"name": "Snickers / Mars", "qty": 2, "amt": 0}, {"name": "Sour Patch Kids", "qty": 2, "amt": 0}, {"name": "Skittles", "qty": 1, "amt": 0}, {"name": "Cracker bars", "qty": 1, "amt": 0}], "cats": []};
+const C={green:"#127A5A",amber:"#D9921C",teal:"#0F7C80",coral:"#D9534F",sky:"#5BA4CF",ink:"#18263A",muted:"#5E6B7E",line:"#DCE2EA"};
+const small=()=>innerWidth<640;
+const cfg={displayModeBar:false,responsive:true};
+const fmt$=v=>"$"+v.toLocaleString("en-CA",{minimumFractionDigits:0,maximumFractionDigits:0});
+const fmt$2=v=>"$"+v.toLocaleString("en-CA",{minimumFractionDigits:2,maximumFractionDigits:2});
+function base(x){return Object.assign({font:{family:"IBM Plex Sans, sans-serif",size:small()?12:13,color:C.ink},paper_bgcolor:"rgba(0,0,0,0)",plot_bgcolor:"rgba(0,0,0,0)",margin:{l:56,r:16,t:16,b:48},xaxis:{gridcolor:C.line,zeroline:false},yaxis:{gridcolor:C.line,zeroline:false},showlegend:false,hoverlabel:{font:{family:"IBM Plex Sans"}}},x||{})}
+function monthly(v){
+ const m=D.months, x=m.map(r=>r.label);
+ let tr,lay;
+ if(v=="amt"){tr=[{type:"bar",x,y:m.map(r=>r.total),marker:{color:m.map(r=>r.partial?"#9FC9B8":C.green)},text:m.map(r=>fmt$(r.total)),textposition:"outside",hovertemplate:"%{x}: %{y:$,.2f}<extra></extra>"}];lay=base({yaxis:{gridcolor:C.line,tickprefix:"$"}})}
+ else if(v=="cnt"){tr=[{type:"bar",x,y:m.map(r=>r.tx),marker:{color:C.teal},text:m.map(r=>r.tx),textposition:"outside",hovertemplate:"%{x}: %{y} purchases<extra></extra>"}];lay=base()}
+ else{tr=[{type:"bar",name:"Card",x,y:m.map(r=>r.card),marker:{color:C.sky},hovertemplate:"Card %{y:$,.2f}<extra></extra>"},{type:"bar",name:"Cash",x,y:m.map(r=>r.cash),marker:{color:C.amber},hovertemplate:"Cash %{y:$,.2f}<extra></extra>"}];lay=base({barmode:"stack",showlegend:true,legend:{orientation:"h",y:1.1},yaxis:{gridcolor:C.line,tickprefix:"$"}})}
+ Plotly.react("cMonthly",tr,lay,cfg);
+}
+function seg(id,fn){document.querySelectorAll("#"+id+" button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#"+id+" button").forEach(x=>x.classList.toggle("on",x==b));fn(b.dataset.v)})}
+seg("segSales",monthly);monthly("amt");
+if(D.heat.z.length)Plotly.newPlot("cHeat",[{type:"bar",x:D.heat.hours,y:D.heat.z,marker:{color:D.heat.z.map(v=>v>=Math.max(...D.heat.z)*0.6?C.green:"#9FC9B8")},text:D.heat.z.map(v=>v?v:""),textposition:"outside",hovertemplate:"%{x}: %{y} purchases<extra></extra>"}],base({margin:{l:40,r:10,t:20,b:60},xaxis:{type:"category",tickangle:-45},yaxis:{gridcolor:C.line,title:{text:"Purchases"}}}),cfg);
+function prod(v){
+ const p=v=="cat"?D.cats:D.products.slice(0,15);
+ const r=[...p].reverse();
+ Plotly.react("cProd",[{type:"bar",orientation:"h",y:r.map(x=>x.name),x:r.map(x=>x.qty),marker:{color:v=="cat"?C.teal:C.green},text:r.map(x=>Math.round(x.qty)+(x.qty==1?" unit":" units")),textposition:"outside",cliponaxis:false,hovertemplate:"%{y}: %{x} sold<extra></extra>"}],base({margin:{l:small()?120:190,r:70,t:10,b:30},xaxis:{gridcolor:C.line}}),cfg);
+}
+if(D.products.length){seg("segProd",prod);prod("prod");}
+(function(){const t=document.getElementById("tComm");let h='<tr><th>Period</th><th class="r">Sales</th><th class="r">Commission (10%)</th><th>Status</th></tr>';D.comm.forEach(r=>{h+=`<tr><td>${r.period}</td><td class="r num">${fmt$2(r.sales)}</td><td class="r num"><b>${fmt$2(r.comm)}</b></td><td>${r.status}</td></tr>`});t.innerHTML=h})();
+(function(){const w=document.getElementById("workCards");w.innerHTML=D.work.map(c=>`<div class="tb"><div class="k">${c.k}</div><div class="big ${c.cls||""} num">${c.v}</div><p>${c.p}</p></div>`).join("");
+ if(document.getElementById("cWork"))Plotly.newPlot("cWork",[{type:"bar",x:D.visits.map(v=>v.month),y:D.visits.map(v=>v.n*D.hpv),marker:{color:C.amber},text:D.visits.map(v=>v.n+" visits · "+(v.n*D.hpv)+" h"),textposition:"outside",cliponaxis:false,hovertemplate:"%{x}: %{y} hours<extra></extra>"}],base({yaxis:{gridcolor:C.line,title:{text:"Hours of Buenavyda time"}}}),cfg)})();
+
+(function(){const t=document.getElementById("tInv");let h='<tr><th>What Volkswagen Cambridge receives</th><th class="r">Value</th><th>How we valued it</th></tr>';D.inv.forEach(r=>{h+=`<tr><td>${r.item}</td><td class="r num"><b>${fmt$(r.amt)}</b></td><td>${r.how}</td></tr>`});h+=`<tr><td><b>Total value added, at no cost to the dealership</b></td><td class="r num"><b>${fmt$(D.invTotal)}</b></td><td></td></tr>`;t.innerHTML=h;
+const cm=[];let acc=0;D.months.forEach(m=>{acc+=m.total*0.10;cm.push(+acc.toFixed(2))});
+if(document.getElementById("cInv"))Plotly.newPlot("cInv",[{type:"scatter",mode:"lines+markers+text",x:D.months.map(m=>m.label),y:cm,line:{color:C.green,width:4,shape:"spline"},marker:{size:9,color:C.green},fill:"tozeroy",fillcolor:"rgba(18,122,90,.12)",text:cm.map((v,i)=>i==cm.length-1?fmt$2(D.earned):""),textposition:"top left",textfont:{size:16,color:C.green},hovertemplate:"%{x}: %{y:$,.2f} earned so far<extra></extra>"}],base({margin:{l:60,r:40,t:40,b:48},yaxis:{gridcolor:C.line,tickprefix:"$",range:[0,D.earned*1.2]}}),cfg)})();
+(function(){const v=document.getElementById("gv"),b=document.getElementById("gvPlay");b.onclick=()=>{b.remove();v.controls=true;v.play()}})();
+(function(){const cv=document.getElementById("aiCanvas"),x=cv.getContext("2d");const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const cols=["#4C8DFF","#3FD16B","#FFD43B","#F7931A","#FF3B5C","#4C8DFF"];
+const labels=["Buenavyda GrabGo","Analyst Channel","Vending machine","Sales data","Restock lists","Live reports"];
+const imgs={0:"assets/grabgo-mark.svg"};const im={};for(const k in imgs){im[k]=new Image();im[k].src=imgs[k]}
+let W,H,dpr,nodes=[],sparks=[],t0=performance.now();
+function size(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+ const R=Math.min(W<520?W*0.30:W*0.40,H*0.40);nodes=labels.map((l,i)=>{const a=-Math.PI/2+i*2*Math.PI/labels.length;return{l,c:cols[i],a,R}})}
+function pos(n,t){const a=n.a+t*0.00004;return[W/2+Math.cos(a)*n.R*1.08,H/2+Math.sin(a)*n.R]}
+function spawn(){const i=Math.floor(Math.random()*nodes.length);sparks.push({i,p:0,v:0.004+Math.random()*0.006,out:Math.random()<0.45})}
+function frame(now){const t=now-t0;x.clearRect(0,0,W,H);const cx=W/2,cy=H/2;
+ nodes.forEach(n=>{const[px,py]=pos(n,t);const g=x.createLinearGradient(cx,cy,px,py);g.addColorStop(0,"rgba(255,255,255,.18)");g.addColorStop(1,n.c+"55");x.strokeStyle=g;x.lineWidth=1.4;x.beginPath();x.moveTo(cx,cy);x.lineTo(px,py);x.stroke()});
+ if(!reduce&&Math.random()<0.35)spawn();
+ sparks=sparks.filter(s=>s.p<1);sparks.forEach(s=>{s.p+=s.v;const n=nodes[s.i];const[px,py]=pos(n,t);const k=s.out?s.p:1-s.p;const sx=px+(cx-px)*(1-k),sy=py+(cy-py)*(1-k);
+  const sxx=s.out?cx+(px-cx)*k:px+(cx-px)*(s.p);const syy=s.out?cy+(py-cy)*k:py+(cy-py)*(s.p);
+  const r=2.2+2*Math.sin(Math.PI*s.p);const gl=x.createRadialGradient(sxx,syy,0,sxx,syy,r*5);gl.addColorStop(0,"#fff");gl.addColorStop(0.25,n.c);gl.addColorStop(1,"transparent");x.fillStyle=gl;x.beginPath();x.arc(sxx,syy,r*5,0,7);x.fill()});
+ const pulse=1+0.06*Math.sin(t/500);const cr=Math.min(W,H)*0.14*pulse;
+ const halo=x.createRadialGradient(cx,cy,cr*0.4,cx,cy,cr*2.4);halo.addColorStop(0,"rgba(76,141,255,.45)");halo.addColorStop(0.5,"rgba(63,209,107,.12)");halo.addColorStop(1,"transparent");x.fillStyle=halo;x.beginPath();x.arc(cx,cy,cr*2.4,0,7);x.fill();
+ const ring=x.createLinearGradient(cx-cr,cy-cr,cx+cr,cy+cr);ring.addColorStop(0,"#4C8DFF");ring.addColorStop(1,"#FF3B5C");x.lineWidth=5;x.strokeStyle=ring;x.fillStyle="#0B0D10";x.beginPath();x.arc(cx,cy,cr,0,7);x.fill();x.stroke();
+ x.fillStyle="#fff";x.font=`800 ${Math.round(cr*0.95)}px "Bricolage Grotesque",system-ui,sans-serif`;x.textAlign="center";x.textBaseline="middle";x.fillText("AI",cx,cy+cr*0.04);
+ nodes.forEach((n,i)=>{const[px,py]=pos(n,t);const nr=Math.max(16,Math.min(W,H)*0.045);x.fillStyle="#0B1729";x.strokeStyle=n.c;x.lineWidth=2.5;x.beginPath();x.arc(px,py,nr,0,7);x.fill();x.stroke();
+  if(im[i]&&im[i].complete){x.drawImage(im[i],px-nr*0.8,py-nr*0.8,nr*1.6,nr*1.6)}else if(i==1){const bw=nr*0.28;[["#FF3B5C",.25],["#FFD43B",0],["#3FD16B",-.3]].forEach((c,j)=>{x.fillStyle=c[0];x.fillRect(px-nr*0.55+j*bw*1.35,py-nr*0.25+c[1]*nr,bw,nr*0.6)})}else{x.fillStyle=n.c;x.beginPath();x.arc(px,py,nr*0.35,0,7);x.fill()}
+  x.fillStyle="#DCE6F2";x.font=`600 ${W<500?11:13}px "IBM Plex Sans",system-ui,sans-serif`;x.textAlign="center";x.textBaseline="top";x.fillText(n.l,px,py+nr+6)});
+ if(!reduce)requestAnimationFrame(frame)}
+size();addEventListener("resize",size);requestAnimationFrame(frame)})();
+const avgComm=D.avgMonthlyComm;
+function wi(){const it=+rIt.value,pr=+rPr.value;oIt.textContent=it;oPr.textContent=fmt$2(pr);const s=it*pr*52/12,c=s*.10;wS.textContent=fmt$(s);wC.textContent=fmt$(c);wY.textContent=fmt$((c+avgComm)*12)}
+rIt.oninput=rPr.oninput=wi;wi();
+const links=[...document.querySelectorAll(".topnav a")];const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+addEventListener("scroll",()=>{let i=-1;secs.forEach((s,k)=>{if(s.getBoundingClientRect().top<120)i=k});links.forEach((a,k)=>a.classList.toggle("on",k==i))},{passive:true});
+</script>
+</body></html>
