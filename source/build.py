@@ -13,7 +13,7 @@ work=[
  dict(k="Service visits logged",v=f"{NV}",p="Installation and 5 refills, the latest on October 7, October 27 and November 11, each one leaving the machine full."),
  dict(k="Hours per visit",v=f"{HPV} h",p="4 h buying stock and planning the refill, 1 h driving there and back, and 1 h refilling and cleaning on site."),
  dict(k="Items in the machine",v="207",p="30 coils: chips, candy and chocolate bars, protein snacks, sodas, energy drinks, Gatorade and protein shakes."),
- dict(k="Drink price",v="$1.00",p="Every drink has been $1.00 since October 27, to give your customers and staff an easy treat while they wait."),
+ dict(k="Drink price",v="$1.25",p="Every drink is $1.25, to give your customers and staff an easy treat while they wait."),
 ]
 inv=[dict(item="Machine + installation: a vending machine on site, with card, cash and coin payment",amt=7500,how="What Buenavyda paid for the machine ($6,500) and its installation ($1,000)"),
  dict(item="A full machine of products from day one",amt=255,how="≈207 items at our cost (about half the selling price)"),
@@ -23,7 +23,7 @@ D=dict(video="",inv=inv,invTotal=invT,earned=comm_amt,months=months,comm=comm,wo
 rep={"__ASOF__":"November 19, 2026","__TOTAL__":f"${total:,.2f}","__COMM__":f"${comm_amt:,.2f}","__INVK__":f"${invT:,.0f}","__VTOT__":f"${invT+comm_amt:,.0f}",
  "__MONTHNOTE__":"Source: Nayax sales records. August 20–31 (installation month) and November are not shown because they are not full months.",
  "__F1__":f"<b>Sales grew from ${months[0]['total']:,.2f} in September to ${months[1]['total']:,.2f} in October</b>, a 76% increase as more customers and staff discovered the machine.",
- "__F2__":"<b>Cold drinks lead: Diet Coke, Coca-Cola and Coke Zero</b> made up most purchases in the last cycle. That is why we keep extra cans ready and moved every drink to $1.00.",
+ "__F2__":"<b>Cold drinks lead: Diet Coke, Coca-Cola and Coke Zero</b> made up most purchases in the last cycle. That is why we keep extra cans ready and keep every drink at a friendly $1.25.",
  "__INVNOTE__":"The machine and installation value is what Buenavyda paid for them. Service hours are valued at what the same work would cost the dealership if it hired someone to do it. Products after the first load are paid from sales, so they are not counted twice. Fuel is not included.",
  "__DATA__":json.dumps(D)}
 html=open("template.html").read()
